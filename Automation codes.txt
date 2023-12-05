@@ -1,0 +1,407 @@
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Threading;
+using NUnit.Framework;
+using OpenQA.Selenium.Support.UI;
+
+
+namespace Nunit_practice
+{
+    class seltest
+    {
+        IWebDriver driver = new ChromeDriver();
+
+        [SetUp]
+        public void initialize()
+        {
+            driver.Navigate().GoToUrl("https://www.google.com/");
+            driver.Manage().Window.Maximize();
+            Thread.Sleep(2000);
+        }
+
+        [Test]
+        public void Executetest()
+        {
+
+            //facebook login automation
+
+            IWebElement email = driver.FindElement(By.Name("email"));
+            email.SendKeys("lucifer.ra@hotmail.com");
+            Thread.Sleep(3000);
+
+            IWebElement password = driver.FindElement(By.Name("pass"));
+            password.SendKeys("Asurisbest2000?");
+            Thread.Sleep(3000);
+
+            IWebElement logbutton = driver.FindElement(By.Name("login"));
+            logbutton.Click();
+            Thread.Sleep(3000);
+
+
+        }
+
+        [Test]
+        public void executetest2()
+        {
+
+            IWebElement email = driver.FindElement(By.XPath(".//*[@id='email']"));
+            email.SendKeys("lucifer.ra@hotmail.com");
+            Thread.Sleep(3000);
+
+
+            IWebElement pass = driver.FindElement(By.XPath(".//*[@id='pass']"));
+            pass.SendKeys("Asurisbest2000?");
+            Thread.Sleep(3000);
+
+
+            IWebElement button = driver.FindElement(By.Name("login"));
+            button.Click();
+            Thread.Sleep(3000);
+
+
+        }
+
+        [Test]
+
+        public void Dropdown() 
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("window.scroll(0,2500)");
+            Thread.Sleep(3000);
+            js.ExecuteScript("window.scroll(0,-2500)");
+            Thread.Sleep(3000);
+            js.ExecuteScript("window.scroll(0,2500)");
+            Thread.Sleep(3000);
+
+
+            IWebElement enter_email = driver.FindElement(By.Id("philadelphia-field-email"));
+            enter_email.SendKeys("adnan123");
+            Thread.Sleep(3000);
+
+            IWebElement course = driver.FindElement(By.XPath(".//*[@id='awf_field-91977689']"));
+
+
+
+            //we use select element for selecting value froma dropdown menu 
+            var selectTest = new SelectElement(course);
+            // Select a value from the dropdown				
+            selectTest.SelectByValue("sap-abap");
+
+            
+
+            //  IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            //  js.ExecuteScript(script, Arguments);
+
+
+
+        }
+
+
+        [Test]
+        public void Scroll()
+        {
+
+            //scroll down
+
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+          //  js.ExecuteScript("window.scrollBy(0,2500)");
+           // js.ExecuteScript("window.scrollBy(0,-2500)");
+            //js.ExecuteScript("window.scrollBy(0,2500)");
+
+            IWebElement check_gmail = driver.FindElement(By.LinkText("Gmail"));
+            check_gmail.Click();
+            driver.Navigate().Back();
+            IWebElement check_images = driver.FindElement(By.LinkText("Images"));
+            check_images.Click();
+            Thread.Sleep(5000);
+            driver.Navigate().Back();
+
+            IWebElement check_apps = driver.FindElement(By.XPath(".//a[@aria-label='Google apps']"));
+            check_apps.Click();
+
+            IWebElement screen_click = driver.FindElement(By.XPath(".//div[@id='gb']"));
+            screen_click.Click();
+            driver.Navigate().Refresh();
+            Thread.Sleep(3000);
+
+            IWebElement sign_in = driver.FindElement(By.LinkText("Sign in"));
+            sign_in.Click();
+            driver.Navigate().Back();
+
+
+            
+
+
+
+
+        }
+
+       
+
+
+
+        [TearDown]
+        public void endtest()
+        {
+
+           driver.Close();
+        }
+
+
+
+    }
+}
+
+
+
+
+
+
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Internal;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Nunit_practice
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            IWebDriver mydriver = new ChromeDriver();
+            mydriver.Navigate().GoToUrl("https://jqueryui.com/droppable/");
+            mydriver.Manage().Window.Maximize();
+            mydriver.SwitchTo().Frame(0);
+
+            IWebElement source = mydriver.FindElement(By.Id("draggable"));
+
+            IWebElement target = mydriver.FindElement(By.Id("droppable"));
+
+            Actions act = new Actions(mydriver);
+            act.DragAndDrop (source, target).Build().Perform();
+
+
+
+
+        }
+    }
+}
+
+
+
+using NUnit.Framework;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Nunit_practice
+{
+     class Darazauto
+    {
+        IWebDriver driver = new ChromeDriver();
+        
+
+        [SetUp]
+
+        public void initialize()
+        {
+            driver.Navigate().GoToUrl("https://www.daraz.pk/");
+            driver.Manage().Window.Maximize();
+            Thread.Sleep(2000);
+
+         
+        }
+
+        [Test]
+        
+        public void checkform()
+        {
+            IWebElement search = driver.FindElement(By.Name("q"));
+            search.SendKeys("Iphone");
+            Thread.Sleep(3000);
+
+            IWebElement search_button = driver.FindElement(By.XPath(".//button[normalize-space()='SEARCH']"));
+            search_button.Click();
+            Thread.Sleep(3000);
+
+            IWebElement iphone = driver.FindElement(By.XPath(".//div[@class='ant-col-19 ant-col-push-5 side-right--Tyehf']//div[1]//div[1]//div[1]//div[2]//div[2]//a[1]"));
+            iphone.Click();
+            Thread.Sleep(3000);
+
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("window.scroll(0,100)");
+            Thread.Sleep(2000);
+
+            IWebElement buynow = driver.FindElement(By.XPath(".//span[contains(text(),'Buy Now')]"));
+            buynow.Click();
+            Thread.Sleep(4000);
+
+            IWebElement iframe = driver.FindElement(By.Id("__JSBridgeIframe__"));
+
+
+            driver.SwitchTo().Frame(iframe);
+
+            IWebElement enter_email = driver.FindElement(By.XPath(".//input[@placeholder='Please enter your Phone Number or Email']"));
+            enter_email.SendKeys("Adnan@gmail.com");
+
+            IWebElement enter_password = driver.FindElement(By.XPath(".//input[@placeholder='Please enter your password']"));
+            enter_password.SendKeys("someone123?");
+
+
+           
+            Console.ReadLine();
+
+
+        }
+
+        [TearDown]
+
+        public void shutdown()
+        {
+            driver.Close();
+        }
+
+       
+
+    }
+}
+
+
+
+
+using NUnit.Framework;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Threading;
+
+namespace Nunit_practice
+{
+    class Daraz
+    {
+        private IWebDriver driver;
+        public IDictionary<string, object> vars { get; private set; }
+        private IJavaScriptExecutor js;
+        [SetUp]
+        public void SetUp()
+        {
+            driver = new ChromeDriver();
+            js = (IJavaScriptExecutor)driver;
+            vars = new Dictionary<string, object>();
+        }
+        [TearDown]
+        protected void TearDown()
+        {
+            driver.Quit();
+        }
+        [Test]
+        public void daraztest()
+        {
+            driver.Navigate().GoToUrl("https://www.daraz.pk/");
+            driver.Manage().Window.Size = new System.Drawing.Size(1382, 754);
+            driver.FindElement(By.Id("q")).SendKeys("infinix");
+            driver.FindElement(By.CssSelector(".search-box__button--1oH7")).Click();
+            driver.FindElement(By.CssSelector(".gridItem--Yd0sa:nth-child(2) #id-img")).Click();
+            js.ExecuteScript("window.scrollTo(0,300)");
+            driver.FindElement(By.CssSelector(".pdp-button_theme_bluedaraz")).Click();
+            {
+                var element = driver.FindElement(By.CssSelector(".pdp-button_theme_bluedaraz"));
+                Actions builder = new Actions(driver);
+                builder.MoveToElement(element).Perform();
+            }
+            {
+                var element = driver.FindElement(By.TagName("body"));
+                Actions builder = new Actions(driver);
+                builder.MoveToElement(element, 0, 0).Perform();
+            }
+            driver.SwitchTo().Frame(4);
+            driver.FindElement(By.CssSelector(".focus > input")).Click();
+            driver.FindElement(By.CssSelector(".focus > input")).SendKeys("None");
+            driver.FindElement(By.XPath("//div[@id=\'container\']/div/div/div/div[2]/form/div/div/div[2]/input")).Click();
+            driver.FindElement(By.CssSelector(".focus > input")).SendKeys("None ");
+        }
+    }
+
+}
+
+
+
+using NUnit.Framework;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Nunit_practice
+{
+    class Amazon
+    {
+        private IWebDriver driver;
+        public IDictionary<string, object> vars { get; private set; }
+        private IJavaScriptExecutor js;
+        [SetUp]
+        public void SetUp()
+        {
+            driver = new ChromeDriver();
+            js = (IJavaScriptExecutor)driver;
+            vars = new Dictionary<string, object>();
+        }
+        [TearDown]
+        protected void TearDown()
+        {
+            driver.Quit();
+        }
+        [Test]
+        public void writingtest()
+        {
+            driver.Navigate().GoToUrl("https://www.amazon.com/?&tag=googleglobalp-20&ref=pd_sl_7nnedyywlk_e&adgrpid=82342659060&hvpone=&hvptwo=&hvadid=673584962059&hvpos=&hvnetw=g&hvrand=16721552564799133158&hvqmt=e&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=1011081&hvtargid=kwd-10573980&hydadcr=2246_13649807");
+            driver.Manage().Window.Size = new System.Drawing.Size(697, 745);
+            driver.FindElement(By.CssSelector(".hm-icon")).Click();
+            driver.FindElement(By.CssSelector(".hmenu > li:nth-child(2) > .hmenu-item > div")).Click();
+            driver.FindElement(By.Id("twotabsearchtextbox")).Click();
+            driver.FindElement(By.Id("twotabsearchtextbox")).SendKeys("i");
+            driver.FindElement(By.Id("twotabsearchtextbox")).SendKeys(Keys.Down);
+            driver.FindElement(By.Id("twotabsearchtextbox")).SendKeys("ipad");
+            driver.FindElement(By.Id("twotabsearchtextbox")).SendKeys(Keys.Down);
+            driver.FindElement(By.Id("twotabsearchtextbox")).SendKeys(Keys.Enter);
+            driver.FindElement(By.CssSelector(".nav-cart-icon")).Click();
+            driver.FindElement(By.LinkText("Customer Service")).Click();
+            driver.FindElement(By.LinkText("Home")).Click();
+            driver.FindElement(By.LinkText("Sell")).Click();
+            driver.FindElement(By.Id("twotabsearchtextbox")).Click();
+            driver.FindElement(By.Id("twotabsearchtextbox")).SendKeys("sports wear");
+            driver.FindElement(By.Id("nav-search-submit-button")).Click();
+
+        }
+    }
+}
+
+
+
+
+
+
+

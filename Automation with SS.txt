@@ -1,0 +1,147 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Internal;
+using OpenQA.Selenium.Support.UI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using WDSE;
+using WDSE.Decorators;
+using WDSE.ScreenshotMaker;
+
+namespace Nunit_practice
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            //automation for login of live cartzlink server 
+
+            IWebDriver mydriver = new ChromeDriver();
+            mydriver.Navigate().GoToUrl("https://emf.itserver.biz/admin/");
+            mydriver.Manage().Window.Maximize();
+            Thread.Sleep(5000);
+
+            ((ITakesScreenshot)mydriver).GetScreenshot().SaveAsFile(@"C:\Users\BS\Documents\Selenium_SS\"+mydriver.Title + DateTime.Now.ToString("dddd, dd MMMM yyyy HH-mm-ss")+".Png");
+
+            IWebElement user_name = mydriver.FindElement(By.Name("YumUserLogin[username]"));
+            user_name.SendKeys("Cartzlink");
+
+            IWebElement password = mydriver.FindElement(By.Name("YumUserLogin[password]"));
+            password.SendKeys("<PTf7[S#BYvrJLgD");
+            ((ITakesScreenshot)mydriver).GetScreenshot().SaveAsFile(@"C:\Users\BS\Documents\Selenium_SS\" + mydriver.Title + DateTime.Now.ToString("dddd, dd MMMM yyyy HH-mm-ss")+".Png");
+            Thread.Sleep(3000);
+
+
+            IWebElement log_button = mydriver.FindElement(By.Name("wp-submit"));
+            log_button.Click();
+            Thread.Sleep(5000);
+            ((ITakesScreenshot)mydriver).GetScreenshot().SaveAsFile(@"C:\Users\BS\Documents\Selenium_SS\" + mydriver.Title + DateTime.Now.ToString("dddd, dd MMMM yyyy HH-mm-ss") + ".Png");
+
+
+            IWebElement slink = mydriver.FindElement(By.XPath(".//a[@href='/admin/indexyii.php?r=task/supporttickets']"));
+            slink.Click();
+            Thread.Sleep(5000);
+            ((ITakesScreenshot)mydriver).GetScreenshot().SaveAsFile(@"C:\Users\BS\Documents\Selenium_SS\" + mydriver.Title + DateTime.Now.ToString("dddd, dd MMMM yyyy HH-mm-ss") + ".Png");
+
+            IWebElement hide = mydriver.FindElement(By.Id("task-form-create-model-btn"));
+            hide.Click();
+            Thread.Sleep(3000);
+           
+            ((ITakesScreenshot)mydriver).GetScreenshot().SaveAsFile(@"C:\Users\BS\Documents\Selenium_SS\" + mydriver.Title + DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss")+ ".Png");
+
+
+            IWebElement tsum = mydriver.FindElement(By.Name("Task[Tasksummary]"));
+            tsum.SendKeys("this is test data for performing automation task");
+            Thread.Sleep(5000);
+
+            IJavaScriptExecutor js = (IJavaScriptExecutor)mydriver;
+            js.ExecuteScript("window.scroll(0,100)");
+            Thread.Sleep(3000);
+
+            IWebElement category = mydriver.FindElement(By.XPath(".//select[@id='task-category']"));
+            var selval = new SelectElement(category);
+            selval.SelectByValue("127165");
+            Thread.Sleep(3000);
+
+            IWebElement des = mydriver.FindElement(By.XPath(".//div[@title='Rich Text Editor, Task-Description']//p"));
+            des.SendKeys("this discription is for test purpose ");
+            Thread.Sleep(2000);
+
+            ((ITakesScreenshot)mydriver).GetScreenshot().SaveAsFile(@"C:\Users\BS\Documents\Selenium_SS\" + mydriver.Title + DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss") + ".Png");
+
+
+            IWebElement create = mydriver.FindElement(By.Id("createtasks"));
+            create.Click();
+            Thread.Sleep(5000);
+            ((ITakesScreenshot)mydriver).GetScreenshot().SaveAsFile(@"C:\Users\BS\Documents\Selenium_SS\" + mydriver.Title + DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss") + ".Png");
+
+           
+
+            //switch to new theme
+            IWebElement new_theme = mydriver.FindElement(By.Name("themeButton"));
+            new_theme.Click();
+            Thread.Sleep(7000);
+
+            ((ITakesScreenshot)mydriver).GetScreenshot().SaveAsFile(@"C:\Users\BS\Documents\Selenium_SS\" + mydriver.Title + DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss") + ".Png");
+
+
+            //switch to old theme
+            IWebElement toggle = mydriver.FindElement(By.XPath("//ul[@id='header-nav']//span[@class='slider round']"));
+            toggle.Click();
+            Thread.Sleep(5000);
+
+            ((ITakesScreenshot)mydriver).GetScreenshot().SaveAsFile(@"C:\Users\BS\Documents\Selenium_SS\" + mydriver.Title + DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss") + ".Png");
+
+
+            //click on customer balance 
+            mydriver.FindElement(By.LinkText("Customers Balance")).Click();
+            Thread.Sleep(5000);
+            ((ITakesScreenshot)mydriver).GetScreenshot().SaveAsFile(@"C:\Users\BS\Documents\Selenium_SS\" + mydriver.Title + DateTime.Now.ToString("yyyy-MM-dd_hh-mm-ss") + ".Png");
+
+
+
+
+
+
+
+
+
+            //  VerticalCombineDecorator vcd = new VerticalCombineDecorator(new ScreenshotMaker());
+            //   mydriver.TakeScreenshot(vcd).ToMagickImage().ToBitmap().Save("sss.Png");
+            //  mydriver.Quit();
+
+
+            // IWebElement payroll = mydriver.FindElement(By.XPath("//span[normalize-space()='Payroll']"));
+            // var selval2 = new SelectElement(payroll);
+            // selval2.SelectByText("Data Entry");
+
+            // Thread.Sleep(3000);
+
+
+
+
+            // IWebElement attendence = mydriver.FindElement(By.XPath("//span[normalize-space()='Attendance']"));
+            // attendence.Click();
+
+            // Thread.Sleep(5000);
+
+            //   mydriver.SwitchTo().Frame(0);
+
+            //  IWebElement source = mydriver.FindElement(By.Id("draggable"));
+
+            //  IWebElement target = mydriver.FindElement(By.Id("droppable"));
+
+            //  Actions act = new Actions(mydriver);
+            // act.DragAndDrop (source, target).Build().Perform();
+
+
+
+
+        }
+    }
+}

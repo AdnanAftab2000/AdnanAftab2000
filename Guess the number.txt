@@ -1,0 +1,59 @@
+ <script>
+
+        count = 0;
+        let x = Math.floor(Math.random() * 10);
+        document.write("The random number is "+x);
+        
+
+        while(count<=2)
+        {
+        
+        let guess = prompt("Guess the number ");
+        if(guess==x)
+        {
+            alert("You have guessed the number : your score is ")
+            break;
+
+            
+        }
+
+        else if(guess>x)
+        {
+            alert("Entered number is greater than the desired number")
+        }
+
+        else if (guess<x)
+        {
+            alert("Entered number is less than than the desired number")
+        }
+       
+        else 
+        {
+            alert("Wrong guess");
+        }
+
+        count++;
+
+        }
+        if(count==3)
+        {
+
+        alert("Attempts are over")
+
+        }
+
+
+
+
+
+    </script>
+
+
+
+
+anis@cartzlink.com
+
+
+
+usps track no 2 = Inovice number 
+UPS track no = invoice id 
